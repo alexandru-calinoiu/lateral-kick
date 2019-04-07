@@ -5,6 +5,10 @@ module LateralKick
     end
 
     module ClassMethods
+      def perform_async(*args)
+        Thread.new { new.perform(*args) }
+      end
+
       def perform_now(*args)
         new.perform(*args)
       end

@@ -15,4 +15,15 @@ class TitleExtractorWorker
   end
 end
 
-TitleExtractorWorker.perform_now("https://archlinux.org")
+RUBYMAGIC = %w(
+  https://blog.appsignal.com/2019/04/02/background-processing-system-in-ruby.html
+  https://blog.appsignal.com/2019/02/05/ruby-magic-classes-instances-and-metaclasses.html
+  https://blog.appsignal.com/2019/03/05/stringscanner.html
+  https://blog.appsignal.com/2019/01/08/ruby-magic-bindings-and-lexical-scope.html
+)
+
+RUBYMAGIC.each do |url|
+  TitleExtractorWorker.perform_async(url)
+end
+
+loop { sleep 1 }
