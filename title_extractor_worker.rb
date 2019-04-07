@@ -26,4 +26,6 @@ RUBYMAGIC.each do |url|
   TitleExtractorWorker.perform_async(url)
 end
 
-loop { sleep 1 }
+Thread.list.each do |t|
+  t.join if t != Thread.current
+end
