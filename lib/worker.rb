@@ -1,6 +1,6 @@
 module LateralKick
-  class Worker
-    def self.inculded(base)
+  module Worker
+    def self.included(base)
       base.extend(ClassMethods)
     end
 
