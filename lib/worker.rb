@@ -6,7 +6,7 @@ module LateralKick
 
     module ClassMethods
       def perform_async(*args)
-        Thread.new { new.perform(*args) }
+        LateralKick.backend.push(worker: self, args: args)
       end
 
       def perform_now(*args)
@@ -17,5 +17,13 @@ module LateralKick
     def perform(*)
       raise NotImplementedError
     end
+  end
+
+  def self.backend
+    @backend
+  end
+
+  def self.backend=(backend)
+    @backend = backend
   end
 end
